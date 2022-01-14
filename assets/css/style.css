@@ -1,0 +1,49 @@
+
+header {
+    display: flex;
+    flex-direction: column;
+}
+
+header ul{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+header a{
+    text-decoration: none;
+    color: orange;
+}
+
+.main-page{
+    text-align: center;
+}
+
+.main-page p{
+    padding: 0 100px;
+}
+
+button{
+    background-color: yellowgreen;
+    border-radius: 10px;
+    border: none;
+    font-size: 15px;
+    padding: 10px 15px;
+}
+
+button:hover{
+    background-color: orange;
+    border-radius: 10px;
+    border: none;
+    font-size: 15px;
+    padding: 10px;
+}
+
+.high-scores{
+    text-align: center;
+}
+
+.high-scores button{
+    margin: 5px;
+}
