@@ -1,4 +1,4 @@
-// global variables
+// questions and answers
 var q1 = "What is an example of a property name?";
 var ans1 = [
     "1. Color",
@@ -7,7 +7,7 @@ var ans1 = [
     "4. All of the above"
 ]
 
-var q12 = "You can center an image by doing display: block and then _________";
+var q2 = "You can center an image by doing display: block and then _________";
 var ans2 = [
     "1. Padding: 10px",
     "2. Flex: wrap",
@@ -39,6 +39,9 @@ var ans5 = [
     "4. A while loop"
 ]
 
+// global variables
+var mainEl = document.getElementsByName("main-page");
+
 
 // start function
 
@@ -54,7 +57,9 @@ var ans5 = [
 
 // show question
 function displayQuestion() {
-    
+    for(var i = 1; i <= 5; i++){
+       // var question = 
+    }
 }
 
 
