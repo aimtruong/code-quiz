@@ -40,27 +40,49 @@ var ans5 = [
 ]
 
 // global variables
-var mainEl = document.getElementsByName("main-page");
+var questionEl = document.getElementsByName("h2");
+var answersEl = document.getElementsByName("p");
+var timerEl = document.getElementById("timer");
+
+var i = 1;
 
 
 // start function
-
+function start(){
+    questionEl.textContent = q1;
+    answersEl.textContent = ans1;
+    timer();
+    displayQuestion();
+}
 
 // timer function
+function timer(){
+    var timeLeft = 60;
+
+    var timeInterval = setInterval(function(){
+        // when timer >= 0
+        if(timeLeft >= 0){
+            timerEl.textContent = "Time: " + timeLeft;
+            timeLeft--;
+            // user finishes quiz
+            if(i === 5){
+                timerEl.textContent = "Time: " + timeLeft;
+                gameOver();
+            }
+        }
+        // when timer is 0
+        else{
+            clearInterval(timeInterval);
+            timerEl.textContent = "";
+            gameOver();
+        }
+    }, 1000);
+
+    console.log(timeLeft);
+};
 
 
-    // when timer > 0
-
-
-    // when timer is 0
-
-
-// show question
-function displayQuestion() {
-    for(var i = 1; i <= 5; i++){
-       // var question = 
-    }
-}
+// question function
 
 
 // click eventlistener for answer
