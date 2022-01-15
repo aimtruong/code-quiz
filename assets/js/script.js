@@ -39,15 +39,45 @@ var ans5 = [
     "4. A while loop"
 ];
 
-// global variables
-var questionEl = document.querySelector("#title");
-var answersEl = document.querySelector("#section");
-var startButtonEl = document.querySelector("#start-button");
-var highScoreList = document.querySelector("#hs-list");
-var nameInputEl = document.querySelector("#name");
-var submitButtonEl = document.querySelector("#submit-button");
-var timerEl = document.querySelector(".timer");
+// front page
+    var body = document.body;
+    var pageEl = document.getElementsByClassName("main-page");
+    var questionEl = document.querySelector("#title");
+    var answersEl = document.querySelector("#section");
+    var timerEl = document.querySelector(".timer");
+    var startButtonEl = document.querySelector("#start-button");
 
+// questions page
+    var choiceA = document.createElement("button");
+    var choiceB = document.createElement("button");
+    var choiceC = document.createElement("button");
+    var choiceD = document.createElement("button");
+        
+        // append childs
+        body.appendChild(pageEl);
+        answersEl.append(choiceA, choiceB, choiceC, choiceD);
+
+        // set Attribute
+        choiceA.setAttribute("style", "margin:auto; width:50%; text-align:center;");
+        choiceB.setAttribute("style", "margin:auto; width:50%; text-align:center;");
+        choiceC.setAttribute("style", "margin:auto; width:50%; text-align:center;");
+        choiceD.setAttribute("style", "margin:auto; width:50%; text-align:center;");
+
+// high score page
+    var highScoreList = document.createElement("ol");
+    var nameInputEl = document.createElement("div");
+    var submitButtonEl = document.createElement("button");
+    var li1 = document.createElement("li");
+    var li2 = document.createElement("li");
+    var li3 = document.createElement("li");
+    var li4 = document.createElement("li");
+    var li5 = document.createElement("li");
+
+        // append Childs
+        body.append(highScoreList, nameInputEl, submitButtonEl);
+        highScoreList.append(li1, li2, li3, li4, li5);
+
+        
 var i = 1;
 
 
@@ -88,53 +118,49 @@ function displayQuestion(){
         answersEl.textContent = ans1;
     }
     
-
     // click eventlistener for answer
     answerButton.addEventListener("click", function(event){
-        if(q1){
-            if(ans1[3]){
+        switch(questionEl){
+            case q1:
+                if(ans1[3]){
+                    
+                }
+                else{
 
-            }
-            else{
+                }
 
-            }
-        }
+            case q2:
+                if(ans2[2]){
+                    
+                }
+                else{
+                    
+                }
 
-        if(q2){
-            if(ans2[2]){
-                
-            }
-            else{
-                
-            }
-        }
+            case q3:
+                if(ans3[0]){
+                    
+                }
+                else{
+                    
+                }
 
-        if(q3){
-            if(ans3[0]){
-                
-            }
-            else{
-                
-            }
 
-        }
+            case q4:
+                if(ans4[0]){
+                    
+                }
+                else{
+                    
+                }
 
-        if(q4){
-            if(ans4[0]){
-                
-            }
-            else{
-                
-            }
-        }
-
-        if(q5){
-            if(ans5[2]){
-                
-            }
-            else{
-                
-            }
+            case q5:
+                if(ans5[2]){
+                    
+                }
+                else{
+                    
+                }
         }
     });
 };
@@ -154,7 +180,9 @@ submitButton.addEventListener("click", function(event){
 
     var getUser = localStorage.getItem("player");
 
-    console.log(JSON.parse(get));
+    console.log(JSON.parse(getUser));
+
+    listEl = 
 
 });
 
