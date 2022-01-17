@@ -1,26 +1,26 @@
 // questions and answers
-var q1 = "What is an example of a property name?";
+var q1 = "What is an example of a event listener?";
 var ans1 = [
-    "1. Color",
+    "1. Submit",
     "2. Background-image",
-    "3. Font-family",
-    "4. All of the above"
+    "3. setItem",
+    "4. If-else statement"
 ];
 
-var q2 = "You can center an image by doing display: block and then _________";
+var q2 = "What is not a Math method?";
 var ans2 = [
-    "1. Padding: 10px",
-    "2. Flex: wrap",
-    "3. Margin: 0 auto",
-    "4. Margin: auto 0"
+    "1. Math.pi",
+    "2. Math.count",
+    "3. Math.max",
+    "4. Math.floor"
 ];
 
-var q3 = "How can you create a new branch and move to that branch?";
+var q3 = "What is a predefined action that we can call or invoke in our code?";
 var ans3 = [
-    "1. Git checkout -b <branch-name>",
-    "2. Git checkout <branch-name>",
-    "3. Git-branch <branch-name>",
-    "4. Git checkout -d <branch-name>"
+    "1. A function",
+    "2. A while loop",
+    "3. A DOM",
+    "4. An alert"
 ];
 
 var q4 = "The condition in an if / else statement is enclosed with";
@@ -55,13 +55,14 @@ var ans5 = [
         
         // append childs
         body.appendChild(pageEl);
+        pageEl.appendChild(answersEl);
         answersEl.append(choiceA, choiceB, choiceC, choiceD);
 
-        // set Attribute
-        choiceA.setAttribute("style", "margin:auto; width:50%; text-align:center;");
-        choiceB.setAttribute("style", "margin:auto; width:50%; text-align:center;");
-        choiceC.setAttribute("style", "margin:auto; width:50%; text-align:center;");
-        choiceD.setAttribute("style", "margin:auto; width:50%; text-align:center;");
+        // set Attributes
+        choiceA.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
+        choiceB.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
+        choiceC.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
+        choiceD.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
 
 // high score page
     var highScoreList = document.createElement("ol");
@@ -76,6 +77,9 @@ var ans5 = [
         // append Childs
         body.append(highScoreList, nameInputEl, submitButtonEl);
         highScoreList.append(li1, li2, li3, li4, li5);
+
+        // set Attributes
+        submitButtonEl.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
 
         
 var i = 1;
@@ -114,8 +118,8 @@ function displayQuestion(){
     timer();
 
     for(i; i <= 5; i++){
-        questionEl.textContent = q1;
-        answersEl.textContent = ans1;
+        // questionEl.textContent = q1;
+        // answersEl.textContent = ans1;
     }
     
     // click eventlistener for answer
@@ -166,7 +170,7 @@ function displayQuestion(){
 };
 
 // game over page with event listener
-submitButton.addEventListener("click", function(event){
+submitButtonEl.addEventListener("click", function(event){
     questionEl.textContent = "Game Over!";
     answersEl.textContent = "Your final score is " + timeLeft + ".";
 
@@ -182,10 +186,10 @@ submitButton.addEventListener("click", function(event){
 
     console.log(JSON.parse(getUser));
 
-    listEl = 
+    listEl = "complete function";
 
 });
 
 
 
-buttonEl.addEventListener("click", displayQuestion);
+startButtonEl.addEventListener("click", displayQuestion);
