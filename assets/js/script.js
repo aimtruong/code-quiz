@@ -94,8 +94,22 @@ ans4El.append(ans4AEl, ans4BEl, ans4CEl, ans4DEl);
 ans5El.append(ans5AEl, ans5BEl, ans5CEl, ans5DEl);
 
 
-// high score page
+// view high scores button
+var header = document.querySelector("#view-HS");
 
+
+// high score page
+function highScorePage(){
+    question.textContent = "High Scores";
+
+    var hs = document.querySelector(".HS-list");
+
+first = document.createElement("ol");
+second = document.createElement("ol");
+third = document.createElement("ol");
+fourth = document.createElement("ol");
+fifth = document.createElement("ol");
+};
 
 
 // timer
@@ -127,90 +141,93 @@ function timerStarts(){
         question.textContent = q1;
         body.appendChild(ans1El);
         timerStarts();
+
+        // addeventlistener for answer click
+        var questionAnswerEl = document.querySelectorAll("button");
+
+        var correctOrWrongEl = document.createElement("p");
+            correctOrWrongEl.textContent = "";
+            correctOrWrongEl.setAttribute("style", "font-style: italic, color: rgba(155, 145, 145, 0.747)");
+            body.appendChild(correctOrWrongEl);
+
+        questionAnswerEl.forEach(button => {
+            button.addEventListener("click", (e) =>{
+                switch(question){
+                    case q1El:
+                        if(ans1AEl){
+                            question.textContent = q2;
+                            body.appendChild(ans2El);
+                            correctOrWrongEl.textContent = "Correct!";
+                            break;
+                        }
+                        else{
+                            timeLeft = timeLeft - 10;
+                            question.textContent = q2;
+                            body.appendChild(ans2El);
+                            correctOrWrongEl.textContent = "Wrong!";
+                            break;
+                        }
+                    case q2El:
+                        if(ans2BEl){
+                            question.textContent = q3;
+                            body.appendChild(ans3El);
+                            correctOrWrongEl.textContent = "Correct!";
+                            break;
+                        }
+                        else{
+                            timeLeft = timeLeft - 10;
+                            question.textContent = q3;
+                            body.appendChild(ans3El);
+                            correctOrWrongEl.textContent = "Wrong!";
+                            break;
+                        }
+                    case q3El:
+                        if(ans3AEl){
+                            question.textContent = q4;
+                            body.appendChild(ans4El);
+                            correctOrWrongEl.textContent = "Correct!";
+                            break;
+                        }
+                        else{
+                            timeLeft = timeLeft - 10;
+                            question.textContent = q4;
+                            body.appendChild(ans4El);
+                            correctOrWrongEl.textContent = "Wrong!";
+                            break;
+                        }
+                    case q4El:
+                        if(ans4AEl){
+                            question.textContent = q5;
+                            body.appendChild(ans5El);
+                            correctOrWrongEl.textContent = "Correct!";
+                            break;
+                        }
+                        else{
+                            timeLeft = timeLeft - 10;
+                            question.textContent = q5;
+                            body.appendChild(ans5El);
+                            correctOrWrongEl.textContent = "Wrong!";
+                            break;
+                        }
+                    case q5El:
+                        if(ans5CEl){
+                            body.removeChild(ans5El);
+                            highScorePage();
+                            correctOrWrongEl.textContent = "Correct!";
+                            break;
+                        }
+                        else{
+                            timeLeft = timeLeft - 10;
+                            body.removeChild(ans5El);
+                            highScorePage();
+                            correctOrWrongEl.textContent = "Wrong!";
+                            break;
+                        }
+                }
+            });
+        });
+    
     });
 
 
-// addeventlistener for answer click
-var questionAnswerEl = document.querySelectorAll("button");
-
-    var correctOrWrongEl = document.createElement("p");
-        correctOrWrongEl.textContent = "";
-        correctOrWrongEl.setAttribute("style", "font-style: italic, color: rgba(155, 145, 145, 0.747)");
-        body.appendChild(correctOrWrongEl);
-
-    questionAnswerEl.addEventListener("click", function(){
-        switch(question){
-            case q1El:
-                if(ans1AEl){
-                    question.textContent = q2;
-                    body.appendChild(ans2El);
-                    correctOrWrongEl.textContent = "Correct!";
-                    break;
-                }
-                else{
-                    timeLeft = timeLeft - 10;
-                    question.textContent = q2;
-                    body.appendChild(ans2El);
-                    correctOrWrongEl.textContent = "Wrong!";
-                    break;
-                }
-            case q2El:
-                if(ans2BEl){
-                    question.textContent = q3;
-                    body.appendChild(ans3El);
-                    correctOrWrongEl.textContent = "Correct!";
-                    break;
-                }
-                else{
-                    timeLeft = timeLeft - 10;
-                    question.textContent = q3;
-                    body.appendChild(ans3El);
-                    correctOrWrongEl.textContent = "Wrong!";
-                    break;
-                }
-            case q3El:
-                if(ans3AEl){
-                    question.textContent = q4;
-                    body.appendChild(ans4El);
-                    correctOrWrongEl.textContent = "Correct!";
-                    break;
-                }
-                else{
-                    timeLeft = timeLeft - 10;
-                    question.textContent = q4;
-                    body.appendChild(ans4El);
-                    correctOrWrongEl.textContent = "Wrong!";
-                    break;
-                }
-            case q4El:
-                if(ans4AEl){
-                    question.textContent = q5;
-                    body.appendChild(ans5El);
-                    correctOrWrongEl.textContent = "Correct!";
-                    break;
-                }
-                else{
-                    timeLeft = timeLeft - 10;
-                    question.textContent = q5;
-                    body.appendChild(ans5El);
-                    correctOrWrongEl.textContent = "Wrong!";
-                    break;
-                }
-            case q5El:
-                if(ans5CEl){
-                    body.removeChild(ans5El);
-                    question.textContent = "High Scores";
-                    highScorePage();
-                    correctOrWrongEl.textContent = "Correct!";
-                    break;
-                }
-                else{
-                    timeLeft = timeLeft - 10;
-                    body.removeChild(ans5El);
-                    question.textContent = "High Scores";
-                    highScorePage();
-                    correctOrWrongEl.textContent = "Wrong!";
-                    break;
-                }
-        }
-    });         
+         

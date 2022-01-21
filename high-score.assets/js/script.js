@@ -1,13 +1,6 @@
 
 // high score page
-var header = document.querySelector("header");
-var hs = document.querySelector(".HS-list");
 
-first = document.createElement("ol");
-second = document.createElement("ol");
-third = document.createElement("ol");
-fourth = document.createElement("ol");
-fifth = document.createElement("ol");
 
 // current player
 
