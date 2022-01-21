@@ -1,195 +1,216 @@
-// questions and answers
-var q1 = "What is an example of a event listener?";
-var ans1 = [
-    "1. Submit",
-    "2. Background-image",
-    "3. setItem",
-    "4. If-else statement"
-];
+// connect questions to title for easy textcontent change
+var body = document.querySelector(".main-page");
+var question = document.querySelector(".title");
+var paragraph = document.querySelector(".section");
 
-var q2 = "What is not a Math method?";
-var ans2 = [
-    "1. Math.pi",
-    "2. Math.count",
-    "3. Math.max",
-    "4. Math.floor"
-];
+// connect answers to body
+var ans1El = document.createElement("form");
+var ans2El = document.createElement("form");
+var ans3El = document.createElement("form");
+var ans4El = document.createElement("form");
+var ans5El = document.createElement("form");
 
-var q3 = "What is a predefined action that we can call or invoke in our code?";
-var ans3 = [
-    "1. A function",
-    "2. A while loop",
-    "3. A DOM",
-    "4. An alert"
-];
+// create element for questions and arrays
+    // for question 01 // ans1AEl
+        var q1 = "What is an example of a event listener?";
 
-var q4 = "The condition in an if / else statement is enclosed with";
-var ans4 = [
-    "1. Parenthesis",
-    "2. Curly brackets",
-    "3. Semicolon",
-    "4. Square brackets"
-];
+        var ans1AEl = document.createElement("button");
+            ans1AEl.textContent = "1. Submit";
 
-var q5 = "Where can you NOT use a break statment in?";
-var ans5 = [
-    "1. A switch",
-    "2. A for loop",
-    "3. An if/else statement",
-    "4. A while loop"
-];
+        var ans1BEl = document.createElement("button");
+            ans1BEl.textContent = "2. Background-image";
 
-// front page
-    var body = document.body;
-    var pageEl = document.getElementsByClassName("main-page");
-    var questionEl = document.querySelector("#title");
-    var answersEl = document.querySelector("#section");
-    var timerEl = document.querySelector(".timer");
-    var startButtonEl = document.querySelector("#start-button");
+        var ans1CEl = document.createElement("button");
+            ans1CEl.textContent = "3. setItem";
 
-// questions page
-    var choiceA = document.createElement("button");
-    var choiceB = document.createElement("button");
-    var choiceC = document.createElement("button");
-    var choiceD = document.createElement("button");
+        var ans1DEl = document.createElement("button");
+            ans1DEl.textContent = "4. If-else statement";
+
+    // for question 02 // ans2BEl
+        var q2El = "What is not a Math method?";
+
+        var ans2AEl = document.createElement("button");
+            ans2AEl.textContent = "1. Math.pi";
+
+        var ans2BEl = document.createElement("button");
+            ans2BEl.textContent = "2. Math.count";
+
+        var ans2CEl = document.createElement("button");
+            ans2CEl.textContent = "3. Math.max";
+
+        var ans2DEl = document.createElement("button");
+            ans2DEl.textContent = "4. Math.floor";
+
+    // for question 03 // ans3AEl
+        var q3El = "What is a predefined action that we can call or invoke in our code?";
+
+        var ans3AEl = document.createElement("button");
+            ans3AEl.textContent = "1. A function";
+
+        var ans3BEl = document.createElement("button");
+            ans3BEl.textContent = "2. A while loop";
+
+        var ans3CEl = document.createElement("button");
+            ans3CEl.textContent = "3. A DOM";
+
+        var ans3DEl = document.createElement("button");
+            ans3DEl.textContent = "4. An alert";
+
+    // for question 04 // ans4AEl
+        var q4El = "The condition in an if / else statement is enclosed with...";
+    
+        var ans4AEl = document.createElement("button");
+            ans4AEl.textContent = "1. A parenthesis";
+
+        var ans4BEl = document.createElement("button");
+            ans4BEl.textContent = "2. Curly brackets";
+
+        var ans4CEl = document.createElement("button");
+            ans4CEl.textContent = "3. A semicolon";
+
+        var ans4DEl = document.createElement("button");
+            ans4DEl.textContent = "4. Square brackets";
+
+    // for question 05 // ans5CEl
+        var q5El = "Where can you NOT use a break statment in?";
         
-        // append childs
-        body.appendChild(pageEl);
-        pageEl.appendChild(answersEl);
-        answersEl.append(choiceA, choiceB, choiceC, choiceD);
+        var ans5AEl = document.createElement("button");
+            ans5AEl.textContent = "1. A switch";
 
-        // set Attributes
-        choiceA.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
-        choiceB.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
-        choiceC.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
-        choiceD.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
+        var ans5BEl = document.createElement("button");
+            ans5BEl.textContent = "2. A for loop";
+
+        var ans5CEl = document.createElement("button");
+            ans5CEl.textContent = "3. An if/else statement";
+
+        var ans5DEl = document.createElement("button");
+            ans5DEl.textContent = "4. A while loop";
+
+// append answers
+ans1El.append(ans1AEl, ans1BEl, ans1CEl, ans1DEl);
+ans2El.append(ans2AEl, ans2BEl, ans2CEl, ans2DEl);
+ans3El.append(ans3AEl, ans3BEl, ans3CEl, ans3DEl);
+ans4El.append(ans4AEl, ans4BEl, ans4CEl, ans4DEl);
+ans5El.append(ans5AEl, ans5BEl, ans5CEl, ans5DEl);
+
 
 // high score page
-    var highScoreList = document.createElement("ol");
-    var nameInputEl = document.createElement("div");
-    var submitButtonEl = document.createElement("button");
-    var li1 = document.createElement("li");
-    var li2 = document.createElement("li");
-    var li3 = document.createElement("li");
-    var li4 = document.createElement("li");
-    var li5 = document.createElement("li");
-
-        // append Childs
-        body.append(highScoreList, nameInputEl, submitButtonEl);
-        highScoreList.append(li1, li2, li3, li4, li5);
-
-        // set Attributes
-        submitButtonEl.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
-
-        
-var i = 1;
 
 
-// timer function
-function timer(){
-    var timeLeft = 60;
 
+// timer
+var headerEl = document.querySelector("header");
+var timerEl = document.querySelector("#timer");
+var timeLeft = 60;
+
+function timerStarts(){
     var timeInterval = setInterval(function(){
-        // when timer >= 0
         if(timeLeft >= 0){
             timerEl.textContent = "Time: " + timeLeft;
             timeLeft--;
-            // user finishes quiz
-            if(i === 5){
-                timerEl.textContent = "Time: " + timeLeft;
-                gameOver();
-            }
-        }
-        // when timer is 0
-        else{
+          }
+          else{
             clearInterval(timeInterval);
             timerEl.textContent = "";
-            gameOver();
-        }
-    }, 1000);
-
-    console.log(timeLeft);
+            highScorePage();
+          }
+        }, 1000);
 };
 
 
-// question function
-function displayQuestion(){
-    // start timer
-    timer();
-
-    for(i; i <= 5; i++){
-        // questionEl.textContent = q1;
-        // answersEl.textContent = ans1;
-    }
+// create start button and eventlistener
+    var startbtnEl = document.querySelector(".start-button"); 
     
-    // click eventlistener for answer
-    answerButton.addEventListener("click", function(event){
-        switch(questionEl){
-            case q1:
-                if(ans1[3]){
-                    
+    startbtnEl.addEventListener("click", function(){
+        paragraph.textContent = "";
+        body.removeChild(startbtnEl);
+        question.textContent = q1;
+        body.appendChild(ans1El);
+        timerStarts();
+    });
+
+
+// addeventlistener for answer click
+var questionAnswerEl = document.querySelectorAll("button");
+
+    var correctOrWrongEl = document.createElement("p");
+        correctOrWrongEl.textContent = "";
+        correctOrWrongEl.setAttribute("style", "font-style: italic, color: rgba(155, 145, 145, 0.747)");
+        body.appendChild(correctOrWrongEl);
+
+    questionAnswerEl.addEventListener("click", function(){
+        switch(question){
+            case q1El:
+                if(ans1AEl){
+                    question.textContent = q2;
+                    body.appendChild(ans2El);
+                    correctOrWrongEl.textContent = "Correct!";
+                    break;
                 }
                 else{
-
+                    timeLeft = timeLeft - 10;
+                    question.textContent = q2;
+                    body.appendChild(ans2El);
+                    correctOrWrongEl.textContent = "Wrong!";
+                    break;
                 }
-
-            case q2:
-                if(ans2[2]){
-                    
-                }
-                else{
-                    
-                }
-
-            case q3:
-                if(ans3[0]){
-                    
+            case q2El:
+                if(ans2BEl){
+                    question.textContent = q3;
+                    body.appendChild(ans3El);
+                    correctOrWrongEl.textContent = "Correct!";
+                    break;
                 }
                 else{
-                    
+                    timeLeft = timeLeft - 10;
+                    question.textContent = q3;
+                    body.appendChild(ans3El);
+                    correctOrWrongEl.textContent = "Wrong!";
+                    break;
                 }
-
-
-            case q4:
-                if(ans4[0]){
-                    
-                }
-                else{
-                    
-                }
-
-            case q5:
-                if(ans5[2]){
-                    
+            case q3El:
+                if(ans3AEl){
+                    question.textContent = q4;
+                    body.appendChild(ans4El);
+                    correctOrWrongEl.textContent = "Correct!";
+                    break;
                 }
                 else{
-                    
+                    timeLeft = timeLeft - 10;
+                    question.textContent = q4;
+                    body.appendChild(ans4El);
+                    correctOrWrongEl.textContent = "Wrong!";
+                    break;
+                }
+            case q4El:
+                if(ans4AEl){
+                    question.textContent = q5;
+                    body.appendChild(ans5El);
+                    correctOrWrongEl.textContent = "Correct!";
+                    break;
+                }
+                else{
+                    timeLeft = timeLeft - 10;
+                    question.textContent = q5;
+                    body.appendChild(ans5El);
+                    correctOrWrongEl.textContent = "Wrong!";
+                    break;
+                }
+            case q5El:
+                if(ans5CEl){
+                    body.removeChild(ans5El);
+                    question.textContent = "High Scores";
+                    highScorePage();
+                    correctOrWrongEl.textContent = "Correct!";
+                    break;
+                }
+                else{
+                    timeLeft = timeLeft - 10;
+                    body.removeChild(ans5El);
+                    question.textContent = "High Scores";
+                    highScorePage();
+                    correctOrWrongEl.textContent = "Wrong!";
+                    break;
                 }
         }
-    });
-};
-
-// game over page with event listener
-submitButtonEl.addEventListener("click", function(event){
-    questionEl.textContent = "Game Over!";
-    answersEl.textContent = "Your final score is " + timeLeft + ".";
-
-    var player = {
-        name = nameInputEl.value.trim(),
-        score = timeLeft.value.trim()
-    };
-
-    // save initials and score in local storage
-    localStorage.setItem("player", JSON.stringify(player));
-
-    var getUser = localStorage.getItem("player");
-
-    console.log(JSON.parse(getUser));
-
-    listEl = "complete function";
-
-});
-
-
-
-startButtonEl.addEventListener("click", displayQuestion);
+    });         

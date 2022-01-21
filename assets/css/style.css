@@ -16,6 +16,11 @@ header a{
     color: orange;
 }
 
+#timer{
+    font-size: 16px;
+    font-weight: bold;
+}
+
 .main-page{
     text-align: center;
 }
@@ -25,6 +30,15 @@ header a{
 }
 
 button{
+    background-color: orange;
+    border-radius: 10px;
+    border: none;
+    font-size: 15px;
+    padding: 10px;
+    margin: 3px 170px;
+}
+
+.start-button{
     background-color: yellowgreen;
     border-radius: 10px;
     border: none;
@@ -32,7 +46,7 @@ button{
     padding: 10px 15px;
 }
 
-button:hover{
+.start-button:hover{
     background-color: orange;
     border-radius: 10px;
     border: none;
