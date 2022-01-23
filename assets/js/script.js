@@ -172,6 +172,11 @@ fifth.textContent = "5. " + fifthHS.name + " - " + fifthHS.highscore;
 // save player info
 var playerName = document.createElement("input");
 var playerHS = document.createElement("p");
+var playerInfo = {
+    name: playerName.value,
+    highscore: timeLeft
+};
+
 
 // submit playerInfo button
 var submitInfoBtn = document.createElement("button");
@@ -351,11 +356,11 @@ function clear(){
 function highScorePage(){
     question.textContent = "High Scores";
     paragraph.textContent = "";
-    
-    playerName.style.display = "none";
+
+    body.removeChild("input");
     playerHS.textContent = "";
-    submitInfoBtn.style.display = "none";
-    startbtnEl.style.display = "none";
+    body.removeChild(submitInfoBtn);
+    body.removeChild(startbtnEl);
     highscorebtn.textContent = "";
 
     body.appendChild(hs);
@@ -407,30 +412,17 @@ function savePlayerScore(){
     
     playerHS.textContent = "Your score is " + timeScore + ".";
     body.appendChild(playerHS);
-
-    highScoreOrNot();
     
     submitInfoBtn.style.display = "inline";
     body.appendChild(submitInfoBtn);
     
-    submitInfoBtn.addEventListener("click", highScorePage);
+    submitInfoBtn.addEventListener("click", saveHS);
 
 };
 
 
 // check player's info if high score
 function highScoreOrNot(){
-
-    var playerInfo = {
-        name: playerName.value,
-        highscore: timeLeft
-    };
-    
-    localStorage.setItem("playerInfo", JSON.stringify(playerInfo));
-    
-    playerInfo = localStorage.getItem("playerInfo");
-    playerInfo = JSON.parse(playerInfo);
-
     if(timeScore >= firstEl.highscore){
         localStorage.setItem("first HS", JSON.stringify(playerInfo));
         firstHS = localStorage.getItem("first HS");
@@ -514,6 +506,22 @@ function highScoreOrNot(){
     else{
         console.log(playerInfo);
     }
+};
+
+
+// save playerHS function
+function saveHS(){
+    playerName = document.getElementsByName("playerName").value;
+    localStorage.setItem("name", playerInfo.name);
+
+    localStorage.setItem("playerInfo", JSON.stringify(playerInfo));
+
+    playerInfo = localStorage.getItem("playerInfo");
+    playerInfo = JSON.parse(playerInfo);
+
+
+
+    highScorePage();
 };
 
 
