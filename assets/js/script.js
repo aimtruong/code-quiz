@@ -1,4 +1,5 @@
 // connect questions to title for easy textcontent change
+var header = document.querySelector("header");
 var body = document.querySelector(".main-page");
 var question = document.querySelector(".title");
 var paragraph = document.querySelector(".section");
@@ -97,6 +98,10 @@ ans5El.append(ans5AEl, ans5BEl, ans5CEl, ans5DEl);
 // high score list
 var hs = document.createElement("form");
 
+// view high scores button
+var highscorebtn = document.querySelector("#view-HS");
+    highscorebtn.addEventListener("click", highScorePage);
+
 // button to go back to main page
 var goBackBtn = document.createElement("button");
     goBackBtn.textContent = "Go Back";
@@ -164,9 +169,24 @@ third.textContent = "3. " + thirdHS.name + " - " + thirdHS.highscore;
 fourth.textContent = "4. " + fourthHS.name + " - " + fourthHS.highscore;
 fifth.textContent = "5. " + fifthHS.name + " - " + fifthHS.highscore;
 
+// save player info
+var playerName = document.createElement("input");
+var playerHS = document.createElement("p");
+
+// submit playerInfo button
+var submitInfoBtn = document.createElement("button");
+submitInfoBtn.textContent = "Submit";
+
 
 // startbutton
 var startbtnEl = document.querySelector(".start-button");
+
+
+// timer
+var timerEl = document.querySelector("#timer");
+var timeLeft = 10;
+
+
 
 // function start()
 function start(){
@@ -243,14 +263,12 @@ function start(){
                                     body.removeChild(ans5El);
                                     correctOrWrongEl.textContent = "Correct!";
                                     savePlayerScore();
-                                    highScorePage();
                                 }
                                 else{
                                     timeLeft = timeLeft - 10;
                                     body.removeChild(ans5El);
                                     correctOrWrongEl.textContent = "Wrong!";
                                     savePlayerScore();
-                                    highScorePage();
                                 }
                             }    
                 });
@@ -263,12 +281,15 @@ function start(){
 function goBack(){
     question.textContent = "Coding Quiz Challenge";
     paragraph.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
+    startbtnEl.style.display = "inline";
+    highscorebtn.textContent = "View High Scores";
     body.appendChild(startbtnEl);
     hs.textContent = "";
-    goBackBtn.disabled;
-    clearBtn.disabled;
+    body.removeChild(goBackBtn);
+    body.removeChild(clearBtn);
     startbtnEl.addEventListener("click", start);
 };
+
 
 // clear function 
 function clear(){
@@ -318,35 +339,23 @@ function clear(){
     var fifthHS = localStorage.getItem("fifth HS");
     fifthHS = JSON.parse(fifthHS);
     
-    first.textContent = "1. " + firstHS.name + " " + firstHS.highscore;
-    second.textContent = "2. " + secondHS.name + " " + secondHS.highscore;
-    third.textContent = "3. " + thirdHS.name + " " + thirdHS.highscore;
-    fourth.textContent = "4. " + fourthHS.name + " " + fourthHS.highscore;
-    fifth.textContent = "5. " + fifthHS.name + " " + fifthHS.highscore;
-}
-
-// save player info
-var playerName = document.createElement("input[name='playerName']").value;
-var playerHS = document.querySelector("timeLeft");
-
-var playerInfo = {
-    name: playerName,
-    highscore: playerHS
+    first.textContent = "1. " + firstHS.name + " - " + firstHS.highscore;
+    second.textContent = "2. " + secondHS.name + " - " + secondHS.highscore;
+    third.textContent = "3. " + thirdHS.name + " - " + thirdHS.highscore;
+    fourth.textContent = "4. " + fourthHS.name + " - " + fourthHS.highscore;
+    fifth.textContent = "5. " + fifthHS.name + " - " + fifthHS.highscore;
 };
 
-
-localStorage.setItem(playerInfo);
-
-
-// view high scores button
-var highscorebtn = document.querySelector("#view-HS");
-    highscorebtn.addEventListener("click", highScorePage);
 
 // high score page
 function highScorePage(){
     question.textContent = "High Scores";
     paragraph.textContent = "";
-    body.removeChild(startbtnEl);
+    
+    playerName.style.display = "none";
+    playerHS.textContent = "";
+    submitInfoBtn.style.display = "none";
+    startbtnEl.style.display = "none";
     highscorebtn.textContent = "";
 
     body.appendChild(hs);
@@ -358,28 +367,153 @@ function highScorePage(){
     clearBtn.addEventListener("click", clear);
 };
     
-
-// timer
-var timerEl = document.querySelector("#timer");
-var timeLeft = 60;
+var timeScore = timeLeft;
 
 function timerStarts(){
     var timeInterval = setInterval(function(){
         if(timeLeft >= 0){
             timerEl.textContent = "Time: " + timeLeft;
             timeLeft--;
+            timeScore = timeLeft;
           }
           else{
             clearInterval(timeInterval);
+            timeScore = 0;
             timerEl.textContent = "";
             ans1El.textContent = "";
             ans2El.textContent = "";
             ans3El.textContent = "";
             ans4El.textContent = "";
             ans5El.textContent = "";
-            highScorePage();
+            savePlayerScore();
         }
     }, 1000);
+};
+
+
+// savePlayerScore function
+function savePlayerScore(){
+    question.textContent = "Quiz Complete!";
+    highscorebtn.textContent = "";
+    ans1El = "";
+    ans2El = "";
+    ans3El = "";
+    ans4El = "";
+    ans5El = "";
+    
+    paragraph.textContent = "Enter initials: ";
+    playerName.style.display = "inline";
+    body.append(paragraph, playerName);
+    
+    playerHS.textContent = "Your score is " + timeScore + ".";
+    body.appendChild(playerHS);
+
+    highScoreOrNot();
+    
+    submitInfoBtn.style.display = "inline";
+    body.appendChild(submitInfoBtn);
+    
+    submitInfoBtn.addEventListener("click", highScorePage);
+
+};
+
+
+// check player's info if high score
+function highScoreOrNot(){
+
+    var playerInfo = {
+        name: playerName.value,
+        highscore: timeLeft
+    };
+    
+    localStorage.setItem("playerInfo", JSON.stringify(playerInfo));
+    
+    playerInfo = localStorage.getItem("playerInfo");
+    playerInfo = JSON.parse(playerInfo);
+
+    if(timeScore >= firstEl.highscore){
+        localStorage.setItem("first HS", JSON.stringify(playerInfo));
+        firstHS = localStorage.getItem("first HS");
+            firstHS = JSON.parse(firstHS);
+            first.textContent = "1. " + firstHS.name + " - " + firstHS.highscore;
+
+        localStorage.setItem("second HS", JSON.stringify(secondHS));
+        secondHS = localStorage.getItem("second HS");
+            secondHS = JSON.parse(secondHS);
+            second.textContent = "2. " + secondHS.name + " - " + secondHS.highscore;
+
+        localStorage.setItem("third HS", JSON.stringify(thirdHS));
+        thirdHS = localStorage.getItem("third HS");
+            thirdHS = JSON.parse(thirdHS);
+            third.textContent = "3. " + thirdHS.name + " - " + thirdHS.highscore;
+
+        localStorage.setItem("fourth HS", JSON.stringify(fourthHS));
+        fourthHS = localStorage.getItem("fourth HS");
+            fourthHS = JSON.parse(fourthHS);
+            fourth.textContent = "4. " + fourthHS.name + " - " + fourthHS.highscore;
+
+        localStorage.setItem("fifth HS", JSON.stringify(fifthHS));
+        fifthHS = localStorage.getItem("fifth HS");
+            fifthHS = JSON.parse(fifthHS);
+            fifth.textContent = "5. " + fifthHS.name + " - " + fifthHS.highscore;
+    }
+    else if(timeScore >= secondEl.highscore){
+        localStorage.setItem("second HS", JSON.stringify(secondHS));
+        secondHS = localStorage.getItem("second HS");
+            secondHS = JSON.parse(secondHS);
+            second.textContent = "2. " + secondHS.name + " - " + secondHS.highscore;
+        
+        localStorage.setItem("third HS", JSON.stringify(thirdHS));
+        thirdHS = localStorage.getItem("third HS");
+            thirdHS = JSON.parse(thirdHS);
+            third.textContent = "3. " + thirdHS.name + " - " + thirdHS.highscore;
+            
+        localStorage.setItem("fourth HS", JSON.stringify(fourthHS));
+        fourthHS = localStorage.getItem("fourth HS");
+            fourthHS = JSON.parse(fourthHS);
+            fourth.textContent = "4. " + fourthHS.name + " - " + fourthHS.highscore;
+            
+        localStorage.setItem("fifth HS", JSON.stringify(fifthHS));
+        fifthHS = localStorage.getItem("fifth HS");
+            fifthHS = JSON.parse(fifthHS);
+            fifth.textContent = "5. " + fifthHS.name + " - " + fifthHS.highscore;
+    }
+    else if(timeScore >= thirdEl.highscore){
+        localStorage.setItem("third HS", JSON.stringify(thirdHS));
+        thirdHS = localStorage.getItem("third HS");
+            thirdHS = JSON.parse(thirdHS);
+            third.textContent = "3. " + thirdHS.name + " - " + thirdHS.highscore;
+
+        localStorage.setItem("fourth HS", JSON.stringify(fourthHS));
+        fourthHS = localStorage.getItem("fourth HS");
+            fourthHS = JSON.parse(fourthHS);
+            fourth.textContent = "4. " + fourthHS.name + " - " + fourthHS.highscore;
+
+        localStorage.setItem("fifth HS", JSON.stringify(fifthHS));
+        fifthHS = localStorage.getItem("fifth HS");
+            fifthHS = JSON.parse(fifthHS);
+            fifth.textContent = "5. " + fifthHS.name + " - " + fifthHS.highscore;
+    }
+    else if(timeScore >= fourthEl.highscore){
+        localStorage.setItem("fourth HS", JSON.stringify(fourthHS));
+        fourthHS = localStorage.getItem("fourth HS");
+            fourthHS = JSON.parse(fourthHS);
+            fourth.textContent = "4. " + fourthHS.name + " - " + fourthHS.highscore;
+
+        localStorage.setItem("fifth HS", JSON.stringify(fifthHS));
+        fifthHS = localStorage.getItem("fifth HS");
+            fifthHS = JSON.parse(fifthHS);
+            fifth.textContent = "5. " + fifthHS.name + " - " + fifthHS.highscore;
+    }
+    else if(timeScore >= fifthEl.highscore){
+        localStorage.setItem("fifth HS", JSON.stringify(fifthHS));
+        fifthHS = localStorage.getItem("fifth HS");
+            fifthHS = JSON.parse(fifthHS);
+            fifth.textContent = "5. " + fifthHS.name + " - " + fifthHS.highscore;
+    }
+    else{
+        console.log(playerInfo);
+    }
 };
 
 
