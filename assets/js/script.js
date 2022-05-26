@@ -519,8 +519,6 @@ function saveHS(){
     playerInfo = localStorage.getItem("playerInfo");
     playerInfo = JSON.parse(playerInfo);
 
-
-
     highScorePage();
 };
 
