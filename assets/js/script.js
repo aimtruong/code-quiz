@@ -41,61 +41,60 @@ var ans5 = [
 
 // front page
     var body = document.body;
-    var pageEl = document.getElementsByClassName("main-page");
-    var questionEl = document.querySelector("#title");
-    var answersEl = document.querySelector("#section");
-    var timerEl = document.querySelector(".timer");
-    var startButtonEl = document.querySelector("#start-button");
+    var pageEl = document.querySelector(".main-page");
+    var questionEl = document.querySelector(".title");
+    var answersEl = document.querySelector(".section");
+    var timerEl = document.querySelector("#timer");
+    var startButtonEl = document.querySelector(".start-button");
+
+    // append childs
+    body.appendChild(pageEl);
+    pageEl.appendChild(answersEl);
 
 // questions page
     var choiceA = document.createElement("button");
     var choiceB = document.createElement("button");
     var choiceC = document.createElement("button");
     var choiceD = document.createElement("button");
-        
-        // append childs
-        body.appendChild(pageEl);
-        pageEl.appendChild(answersEl);
-        answersEl.append(choiceA, choiceB, choiceC, choiceD);
 
-        // set Attributes
-        choiceA.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
-        choiceB.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
-        choiceC.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
-        choiceD.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
+    // set Attributes
+    choiceA.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
+    choiceB.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
+    choiceC.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
+    choiceD.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
 
-// high score page
-    var highScoreList = document.createElement("ol");
-    var nameInputEl = document.createElement("div");
-    var submitButtonEl = document.createElement("button");
-    var li1 = document.createElement("li");
-    var li2 = document.createElement("li");
-    var li3 = document.createElement("li");
-    var li4 = document.createElement("li");
-    var li5 = document.createElement("li");
-
-        // append Childs
-        body.append(highScoreList, nameInputEl, submitButtonEl);
-        highScoreList.append(li1, li2, li3, li4, li5);
-
-        // set Attributes
-        submitButtonEl.setAttribute("style", "background-color: yellowgreen; border-radius: 10px; border: none; font-size: 15px; padding: 10px 15px;");
-
-        
+// question number user is on 
 var i = 1;
 
+// check if answer is correct function
+function checkAnswer(i){
+    switch(i){
+        case 1:
+            if(choiceA.click){
+                console.log('correct');
+                break;
+            }
+            else{
+                console.log('wrong');
+                break;
+            }
+    };
+};
+
+
+// timer variable to countdown and save for player's time
+var timeLeft = 5;
 
 // timer function
 function timer(){
-    var timeLeft = 60;
 
     var timeInterval = setInterval(function(){
-        // when timer >= 0
+        // when timer >= 0, count down by 1
         if(timeLeft >= 0){
             timerEl.textContent = "Time: " + timeLeft;
             timeLeft--;
             // user finishes quiz
-            if(i === 5){
+            if(i === 6){
                 timerEl.textContent = "Time: " + timeLeft;
                 gameOver();
             }
@@ -107,8 +106,6 @@ function timer(){
             gameOver();
         }
     }, 1000);
-
-    console.log(timeLeft);
 };
 
 
@@ -117,66 +114,58 @@ function displayQuestion(){
     // start timer
     timer();
 
-    for(i; i <= 5; i++){
-        // questionEl.textContent = q1;
-        // answersEl.textContent = ans1;
-    }
+    startButtonEl.style.display = 'none';
+    answersEl.textContent = '';
+
+    answersEl.appendChild(choiceA);
+    answersEl.appendChild(choiceB);
+    answersEl.appendChild(choiceC);
+    answersEl.appendChild(choiceD);
     
-    // click eventlistener for answer
-    answerButton.addEventListener("click", function(event){
-        switch(questionEl){
-            case q1:
-                if(ans1[3]){
-                    
-                }
-                else{
+        // addEventListeners to choice buttons to check for correct answer and display next question
+        choiceA.addEventListener('click', checkAnswer);
+        choiceB.addEventListener('click', checkAnswer);
+        choiceC.addEventListener('click', checkAnswer);
+        choiceD.addEventListener('click', checkAnswer);
 
-                }
-
-            case q2:
-                if(ans2[2]){
-                    
-                }
-                else{
-                    
-                }
-
-            case q3:
-                if(ans3[0]){
-                    
-                }
-                else{
-                    
-                }
-
-
-            case q4:
-                if(ans4[0]){
-                    
-                }
-                else{
-                    
-                }
-
-            case q5:
-                if(ans5[2]){
-                    
-                }
-                else{
-                    
-                }
+    for(i; i <= 6; i++){
+        switch(i){
+            case 1:
+                questionEl.textContent = q1;
+                choiceA.textContent = ans1[0];
+                choiceB.textContent = ans1[1];
+                choiceC.textContent = ans1[2];
+                choiceD.textContent = ans1[3];
+            case 2:
+                questionEl.textContent = q2;
+                break;
+            case 3:
+                questionEl.textContent = q3;
+                break;
+            case 4:
+                questionEl.textContent = q4;
+                break;
+            case 5:
+                questionEl.textContent = q5;
+                break;
         }
-    });
+    }
+
+
 };
 
-// game over page with event listener
-submitButtonEl.addEventListener("click", function(event){
+function gameOver(){
     questionEl.textContent = "Game Over!";
     answersEl.textContent = "Your final score is " + timeLeft + ".";
 
+    var nameInputEl = document.createElement('input');
+        nameInputEl.className('nameInput');
+        nameInputEl.textContent = 'Enter Name';
+        pageEl.appendChild(nameInputEl);
+
     var player = {
-        name = nameInputEl.value.trim(),
-        score = timeLeft.value.trim()
+        name: nameInputEl.value.trim(),
+        score: timeLeft.value.trim()
     };
 
     // save initials and score in local storage
@@ -185,11 +174,8 @@ submitButtonEl.addEventListener("click", function(event){
     var getUser = localStorage.getItem("player");
 
     console.log(JSON.parse(getUser));
-
-    listEl = "complete function";
-
-});
-
-
+};
 
 startButtonEl.addEventListener("click", displayQuestion);
+
+
