@@ -66,22 +66,6 @@ var ans5 = [
 // question number user is on 
 var i = 1;
 
-// check if answer is correct function
-function checkAnswer(i){
-    switch(i){
-        case 1:
-            if(choiceA.click){
-                console.log('correct');
-                break;
-            }
-            else{
-                console.log('wrong');
-                break;
-            }
-    };
-};
-
-
 // timer variable to countdown and save for player's time
 var timeLeft = 5;
 
@@ -122,13 +106,30 @@ function displayQuestion(){
     answersEl.appendChild(choiceC);
     answersEl.appendChild(choiceD);
     
-        // addEventListeners to choice buttons to check for correct answer and display next question
-        choiceA.addEventListener('click', checkAnswer);
-        choiceB.addEventListener('click', checkAnswer);
-        choiceC.addEventListener('click', checkAnswer);
-        choiceD.addEventListener('click', checkAnswer);
+    // check if answer is correct function
+    function checkAnswer(i){
+        switch(i){
+            case 1:
+                if(choiceA.onclick){
+                    console.log('correct');
+                    break;
+                }
+                else{
+                    console.log('wrong');
+                    break;
+                }
+        };
+    };
+    
+    
 
     for(i; i <= 6; i++){
+        // addEventListeners to choice buttons to check for correct answer and display next question
+        choiceA.addEventListener('submit', checkAnswer(i));
+        choiceB.addEventListener('submit', checkAnswer(i));
+        choiceC.addEventListener('submit', checkAnswer(i));
+        choiceD.addEventListener('submit', checkAnswer(i));
+        
         switch(i){
             case 1:
                 questionEl.textContent = q1;
